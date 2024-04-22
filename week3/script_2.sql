@@ -1,6 +1,10 @@
+duckdb
+.open database.db
+
+
 .maxrow 6
 SELECT Location FROM Site;
-SELECT * FRO Site WHERE Area < 200;
+SELECT * FROM Site WHERE Area < 200;
 SELECT * FROM Site WHERE Area < 200 AND Location LIKE '%USA';
 -- expressions
 SELECT Site_name, Area FROM Site;

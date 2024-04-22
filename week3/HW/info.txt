@@ -1,0 +1,28 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+followed example code to make temp table and create the table
+have the value in its own parenthesis
+
+assignment 3
+CREATE TABLE (table name)
+INSERT INTO (table name) VALUES (v1), (v2), (v3)
