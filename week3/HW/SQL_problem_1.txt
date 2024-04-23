@@ -1,0 +1,29 @@
+Part 1
+
+I first constructed a table with these observations:
+- 5
+- 10
+- 15
+- 20
+- 25
+- NULL
+
+If I were to look at this table, I would go ahead and average the observations that are not NULL. I am not including NULL's in my calculations as I am not considering that an observation that has impact on the overall analysis.
+
+After doing my calculations, I get an average of 15. This is because I added the 5 numbers up together and then divided it by 5 (the number of observations that were added together).
+
+When comparing it to my temp SQL table, I also get an average of 15. From this, I can conclude that AVG function does not take into consideration the NULL observations and ignores them in the calculation.
+
+Part 2
+Running this line:
+```
+SELECT SUM(Count)/COUNT(*) FROM table1;
+```
+I get an answer of 12.5. But running the next line:
+```
+SELECT SUM(Count)/COUNT(Count) FROM table1;
+```
+I get an answer of 15.
+
+From this, the second line is correct. This is because both the SUM and COUNT function takes into account observations that are not NULL.
+Because these functions are used both in the numerator and denominator, we are specifying that we want a complete count of observations, since it ignores the NULL observations.

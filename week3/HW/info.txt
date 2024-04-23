@@ -1,5 +1,6 @@
 
-
+part 1
+make myself a new table (giving it values and info)
 
 
 
