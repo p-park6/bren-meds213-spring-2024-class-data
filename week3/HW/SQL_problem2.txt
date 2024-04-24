@@ -1,0 +1,12 @@
+Part 1
+
+When running the line:
+```
+SELECT Site_name, MAX(Area) FROM Site;
+```
+I receive an error message that states "Error: Binder Error: column "Site_name" must appear in the GROUP BY clause or must be part of an aggregate function."
+This is most likely because we are telling it too many conditions for it to look for in the first line. The logic of how the SQL should be asked is:
+1. Asking it to select and find the max value of the area column,
+2. Get the information from the Site table
+3. Tell it to group by Site name
+Once these steps are completed, we will be able to get the max value from the Site table for each Site_name
