@@ -20,12 +20,16 @@ CREATE TRIGGER egg_filler
 -- recheck those observations to see if egg_num has been updated correctly
 SELECT * FROM Bird_eggs WHERE Nest_ID = '14eabaage01';
 
-
 -- reset trigger
-DROP TRIGGER egg_filler
-
+DROP TRIGGER egg_filler;
 
 -- Part 2
+
+-- create a new observation into the table
+INSERT INTO Bird_eggs
+    (Nest_ID, Length, Width)
+    VALUES ('14eabaage01', 12.34, 56.78);
+
 -- update table for other columns for Book_page, Year, and Site
 CREATE TRIGGER egg_filler
     AFTER INSERT ON Bird_eggs
