@@ -1,0 +1,100 @@
+---
+title: "dbplyr"
+---
+
+
+
+```{r warning = FALSE}
+library(tidyverse)
+library(DBI)         # low-level database interface, comparable to what we saw in Python
+library(dbplyr)
+library(duckdb)     # Specific to duckDB
+```
+
+
+## Connect to database
+
+```{r}
+conn <- DBI::dbConnect(duckdb::duckdb(), dbdir = "../week3/database.db")
+```
+
+```{r}
+DBI::dbListTables(conn)
+```
+
+```{r}
+species <- tbl(conn, "Species")
+species
+```
+
+SQL query
+
+```{r}
+df <- dbGetQuery(conn, "SELECT * FROM Species WHERE Code LIKE 'a%' ")
+df
+```
+
+##`dbplyr`
+
+```{r}
+species %>% 
+  filter(Relevance == "Study species") %>% 
+  select(Code, Scientific_name) %>% 
+  show_query()
+
+```
+
+```{r}
+species %>% 
+  filter(Relevance == "Study species") %>% 
+  select(Code, Scientific_name) %>% 
+  collect()
+```
+
+
+### Froup by relevance and count the number of species in each group (using species)
+```{r}
+species %>% 
+  group_by(Relevance) %>% 
+  summarise(num_species = n()) %>% 
+  arrange(-num_species) %>% 
+  show_query()
+```
+
+We can even mutate!!
+
+We want to add a "X" in front of the Codes and update the code column using a mutate
+
+```{r}
+species %>% 
+  mutate(Code = paste0("X", Code)) %>% 
+  show_query()
+```
+
+You can do join!!
+```{r}
+eggs_db <- tbl(conn, "Bird_eggs")
+nest_db <- tbl(conn, "Bird_nests")
+```
+
+```{r}
+str(eggs_db)
+#getting the structure and the information from the tables, but not the dataframe
+```
+
+Do a left join on the nest table
+```{r}
+egg_nest_join <- left_join(nest_db, eggs_db, by = "Nest_ID")
+egg_nest_join
+```
+
+## Close your connection
+
+```{r}
+DBI::dbDisconnect(conn, shutdown = TRUE)
+```
+
+
+
+
+

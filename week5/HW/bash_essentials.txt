@@ -1,0 +1,26 @@
+1. The first bash command: `ls` lists all the directories and subdirectories that are in that pathfile you are in.
+    The second bash command: `ls .` lists whatever is in the current directory.
+    The third bash command: `ls "$(pwd)/../week3"` follows the current syntax: it looks at where you are, goes one back in the directory, and then goes into the week3 folder.
+All three of these commands do show the same outputs, but fundamentally do different actions
+
+2. The second line prints only the bare number from all the entries combined is because we are asking it to concatenate all of the files that end with a .csv. We are then asking to look at the word count from all of those .csv and the -l tells it to list it as a long list. However, because we concatenate everything, it only gives us the one number instead of the whole list, which was specified as the first part for the first bash line. The main part in this line is the | (pipe) function. So fundamentally, the syntax for this bash line is 'do this first, then do that next'. Overall, it is saying, 'concatenate all the files that end with a .csv' and then 'find the word cound and show it as a long list'
+
+3. In this example, we get the number 100. The reason why we get 100 is that we are specifying the species.csv at the end of the bash script. This is giving us the word count found in the species.csv dataset as it overturns the first part of the piped bash script. A simplier way to write this code is as such: wc -l species.csv.
+
+4. At first I thought I would be able to achieve this by putting parentheses around name like this: echo $(name)_Howard. However, it thought I was calling name is as a command. Next, what I did was put a space between the _ and Howard. However I got this as an answer: Moe _Howard. After doing some googling, I realized I had to put {} in between name as such: echo ${name}_Howard
+
+5. Here, if the myscript.sh contains something that says "print $1 and $# of the .csv that are passed onto it, it would print the first csv in that whole list, and the $# would output basically how many csv files there are in that list.
+
+6. Here, the syntax is very specific. There are quotes around the first "$(date)" and no quotes around the second $(date). Looking at past examples, it would be safe to assume that the one with quotes is treated as one whole variable. From this, the first position ($1) would output the whole date and time. The second date does not have quotes. I would assume this to not be one whole variable. So from the output, it would be the day of this month. For this example, I got the date Wednesday May 8 04:22:42 AM UTC 2024. So $3 would give me 8, for the eight day of that month.
+
+7. When doing that overwrite command, it deletes all the contents that were once in my .txt file. As stated in section 7, "Caution: except for >>, all forms of > are destructive: Bash overwrites any existing file with an empty file before the program is run". From this, the file is not sorted, but instead written over with an empty file. To correctly sort the contents in the text file, I would run these two lines instead:
+
+    1.    sort junk_file.txt > sorted_junk_file.txt
+        This tells it to sort the junk_file and write it into the newly created sorted_junk_file.txt
+    2.    mv sorted_junk_file.txt junk_file.txt
+        At first I was confused since I thought the function: mv sorted_junk_file.txt > junk_file.txt would work. However, I received a warning stating that the there is a missing destination file.
+
+8. To find out what would happen, I did these two commands in the terminal:
+    wc -l *.csv
+    wc -l * .csv
+For the first command, I was greeted with a list the same as problem two. However, when I added the space, I received a list of everything in my week 3 folder as well as a message stating this: "wc: .csv: No such file or directory". From this, I will assume that the command: rm * .csv, with the space included, deletes everything in my week 3 folder, which indeed makes it a notoriously dangerous command.

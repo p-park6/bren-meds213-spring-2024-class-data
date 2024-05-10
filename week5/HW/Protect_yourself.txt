@@ -1,0 +1,4 @@
+Some strategies were mentioned in class for reducing the possibility of performing UPDATEs and DELETEs that have catastrophic consequences. What strategy will you use?
+
+One way I would protect myself is to create a temp table and duplicate all the info onto my temp table and do my calculations and changes there. Once I achieve the output I want, I would copy that code onto my original table using the necessary UPDATE or DELETE function.
+Another way I would protect myself is to create constant backup on an external hard drive. This would protect me in the case I accidently delete or update a table that I did not want to change.
