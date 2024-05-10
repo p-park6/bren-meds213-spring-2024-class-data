@@ -39,29 +39,6 @@ CREATE TRIGGER egg_filler
     AFTER INSERT ON Bird_eggs
     FOR EACH ROW
     BEGIN
-    -- update egg_num
-        UPDATE Bird_eggs
-        SET Egg_num = (SELECT COUNT(*) FROM Bird_eggs WHERE Nest_ID = new.Nest_ID)
-        WHERE Nest_ID = new.Nest_ID AND Egg_num IS NULL;
-    -- update book_page
-        UPDATE Bird_eggs
-        SET Book_page = (SELECT Book_page FROM Bird_eggs)
-        WHERE Nest_ID = new.Nest_ID AND Egg_num IS NULL;
-    -- update Year
-        UPDATE Bird_eggs
-        SET Year = (SELECT Year FROM Bird_eggs)
-        WHERE Nest_ID = new.Nest_ID AND Egg_num IS NULL;
-    -- update site
-        UPDATE Bird_eggs
-        SET Site = (SELECT Site FROM Bird_eggs)
-        WHERE Nest_ID = new.Nest_ID AND Egg_num IS NULL;
-    END;
-
-
-CREATE TRIGGER egg_filler
-    AFTER INSERT ON Bird_eggs
-    FOR EACH ROW
-    BEGIN
     -- update all
         UPDATE Bird_eggs
             SET 
